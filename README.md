@@ -192,4 +192,28 @@ for max_leaf_nodes in [5, 50, 500, 5000]:
     my_mae = get_mae(max_leaf_nodes, train_X, val_X, train_y, val_y)
     print("Max leaf nodes: %d  \t\t Mean Absolute Error:  %d" %(max_leaf_nodes, my_mae))
 ```
+file: [exercise-underfitting-and-overfitting.ipynb](https://github.com/gabboraron/Intro_to_Machine_Learning-Kaggle/blob/main/exercise-underfitting-and-overfitting.ipynb); Kaggle version [kaggle.com/sndorburian](https://www.kaggle.com/sndorburian/exercise-underfitting-and-overfitting)
 
+## Random Forests
+A deep tree with lots of leaves will overfit because each prediction is coming from historical data from only the few houses at its leaf. But a shallow tree with few leaves will perform poorly because it fails to capture as many distinctions in the raw data.
+ 
+The random forest uses many trees, and it makes a prediction by averaging the predictions of each component tree. It generally has much better predictive accuracy than a single decision tree and it works well with default parameters.
+
+We will use the variables from `train_X, val_X, train_y, val_y = train_test_split(X, y,random_state = 0)`
+
+We build a [random forest](https://en.wikipedia.org/wiki/Random_forest) model similarly to how we built a decision tree in scikit-learn - this time using the [`RandomForestRegressor`](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html) class instead of `DecisionTreeRegressor`.
+
+```Python
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_absolute_error
+
+forest_model = RandomForestRegressor(random_state=1)
+forest_model.fit(train_X, train_y)
+melb_preds = forest_model.predict(val_X)
+print(mean_absolute_error(val_y, melb_preds))
+```
+
+> There is likely room for further improvement, but this is a big improvement over the best decision tree error of 250,000. There are parameters which allow you to change the performance of the Random Forest much as we changed the maximum depth of the single decision tree. But one of the best features of Random Forest models is that they generally work reasonably even without this tuning.
+
+## Conclusion
+All in one example: [Exercise: Housing Prices Competition: exercise-machine-learning-competitions.ipynb](https://github.com/gabboraron/Intro_to_Machine_Learning-Kaggle/blob/main/exercise-machine-learning-competitions.ipynb)
