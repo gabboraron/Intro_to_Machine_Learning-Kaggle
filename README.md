@@ -1,4 +1,26 @@
 # Intro to Machine Learning - kaggle
+> ## Summary from article *[How to build your own Neural Network from scratch in Python](https://towardsdatascience.com/how-to-build-your-own-neural-network-from-scratch-in-python-68998a08e4f6)* 
+> 
+> The output `ŷ` of a simple 2-layer Neural Network is: ![ŷ=r(W2r(W1x+b1)+b2)](https://miro.medium.com/max/355/1*E1_l8PGamc2xTNS87XGNcA.png) where `W` are weights and `b` are biases, and only these effects the output `ŷ`. The right values for the weights and biases determines the strength of the predictions. The process of fine-tuning the weights and biases from the input data is known as training. 
+> 
+> In each iteration of the training:
+> - Calculating the predicted output `ŷ`, known as `feedforward`
+> - Updating the weights and biases, known as `backpropagation`
+> 
+> A way to evaluate the “goodness” of our predictions is the loss function.
+> 
+> There are many available loss functions, and the nature of our problem should dictate our choice of loss function. In this tutorial, we’ll use a simple sum-of-sqaures error as our loss function: ![Sum_of_squares_error = sum(from i=1; to n)(y-ŷ)^2](https://miro.medium.com/max/300/1*iNa1VLdaeqwUAxpNXs3jwQ.png) That is, the sum-of-squares error is simply the sum of the difference between each predicted value and the actual value. The difference is squared so that we measure the absolute value of the difference. 
+> 
+> **Our goal in training is to find the best set of weights and biases that minimizes the loss function.**
+> 
+> We need to find a way to propagate the error back, and to update our weights and biases. In order to know the appropriate amount to adjust the weights and biases by, we need to know the derivative of the loss function with respect to the weights and biases. Recall from calculus that the derivative of a function is simply the slope of the function. If we have the derivative, we can simply update the weights and biases by increasing/reducing with it. This is known as gradient descent. However, we can’t directly calculate the derivative of the loss function with respect to the weights and biases because the equation of the loss function does not contain the weights and biases. Therefore, we need the chain rule to help us calculate it. 
+> ![Loss(y,ŷ) = sum(from i=1; to n)((y-ŷ)^2) => (d Loss(y,ŷ) / d W) = 2(y-ŷ) * z(1-z) * x ](https://miro.medium.com/max/700/1*7zxb2lfWWKaVxnmq2o69Mw.png)
+> 
+> Our Neural Network should learn the ideal set of weights to represent this function. Note that it isn’t exactly trivial for us to work out the weights just by inspection alone.
+> 
+> code: [github.com/jamesloyys/ ... neural_network_backprop-py](https://gist.github.com/jamesloyys/ff7a7bb1540384f709856f9cdcdee70d#file-neural_network_backprop-py)
+
+
 ## basics
 ```Python
 from learntools.core import binder
